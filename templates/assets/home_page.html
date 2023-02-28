@@ -1,46 +1,28 @@
-{% extends 'base.html' %}
-
-{% block head %}
-
-  <title>Lost and Found | Home Page</title>
-
-{% endblock %}
+<!-- home.html -->
+{% extends "assets/../base.html" %}
 
 {% block body %}
-<!-- upload images code  -->
-
-    <div class="container-fluid">
-
-  {% for item in request_item %}
-
-    <div class="col-md-4" style="cursor: pointer">
-
-      <div class="card">
-
-        <img class="img-card-top mx-auto" src="{{ i.Image.url }}" alt="{{ i.ItemID }}" width="300px" height="200px">
-
-        <div class="card-content">
-
-          <p class="card-text">{{ i.Description }} </p>
-
-          <a href="{% url 'claim' id=i.ItemID %}">
-
-            <button>Click here to claim</button>
-
-          </a><br><br>
-
-        </div><!-- card content -->
-      </div><!-- card -->
-    </div><!-- col-md-4 -->
-
-
-
-      </div><!-- row closing -->
-
-      <hr>
-
-
-  {% endfor %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {% for item in request_info_objects %}
+      <p>Item info: {{ item.Item_info }}</p>
+      <p>Description: {{ item.Description }}</p>
+      <p>Location: {{ item.Location }}</p>
+{% endfor %}
+    </div>
+  </div>
 </div>
 
+    <form action="{% url 'delete_info' %}" method="POST">
+  {% csrf_token %}
+  <button type="submit">Delete information</button>
+</form>
 {% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+{% extends "assets/../base.html" %}
+
+{% block content %}
+
+    <div class="px-3 py-2 bg-gray-100 rounded-sm">
+   <div class="px-3 py-2 bg-gray-100 rounded-sm">
+    <h3 class="text-3xl text-gray-900">ITEM FOUND:  {{ request_info.item_info }}</h3>
+    </div>
+    <div class="px-3 py-2 bg-gray-100 rounded-sm">
+        <p class="text-3xl text-gray-900">DESCRIPTION:  {{ request_info.description }}</p>
+    </div>
+    <div class="px-3 py-2 bg-gray-100 rounded-sm">
+    <p class="text-black-600 text-sm">LOCATION:  {{ request_info.location }}</p>
+    </div>
+    <div class="px-3 py-2 bg-gray-100 rounded-sm">
+    <p>Please make sure head to reception and collect the item with our staff</p>
+    </div>
+</div>
+{% endblock content %}

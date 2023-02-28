@@ -1,8 +1,10 @@
-from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from django import forms
+from assets.models import ItemInfo
 
-
+# SIGN UP FORM
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
     last_name = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
@@ -17,8 +19,23 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
 
+# EDIT PROFILE FORM
 class EditProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = (
             'email', 'first_name', 'username', 'last_name', 'password')
+
+
+# REQUEST ITEM FORM
+class ItemInfoForm(ModelForm):
+    Item_info = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
+    description = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
+    location = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
+    image = forms.ImageField()
+    # date
+    #image
+
+    class Meta:
+        model = ItemInfo
+        fields = ('Item_info', 'description', 'location', 'image')

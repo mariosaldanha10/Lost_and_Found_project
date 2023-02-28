@@ -1,65 +1,23 @@
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import get_object_or_404
-from assets.forms import SignUpForm, EditProfileForm
-from assets.models import UserProfile, ItemInfo, RequestInfo, ClaimInfo
+from assets.forms import EditProfileForm
+from assets.models import UserProfile, ItemInfo, RequestInfo
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from .forms import SignUpForm
-from django.contrib import messages
-
-"""
-The claim view handles a claim request made by a user. 
-The view retrieves an ItemInfo object from the database using the id argument passed in the URL. 
-If the request method is not a POST request, the view returns a render response that displays the 
-assets/claim.html template with the item object passed as context. If the request method is a POST
- request, the view retrieves the location claimed by the user and the actual location of the item 
- from the request.POST data. Then, the view checks if the claimed location is contained in the actual 
- location or if the actual location is contained in the claimed location, and sets the claim_success 
- flag accordingly. If the claim is successful, the view creates a new ClaimInfo object with the 
- user ID, the claimed location, and the item ID, and saves it to the database. 
- Finally, the view returns a render response that displays the assets/claim.html template with the 
- item, status, and post values passed as context.
-"""
-
-
-def claim(request, id):
-    item = get_object_or_404(ItemInfo, pk=id)
-
-    if request.method != 'POST':
-        return render(request, 'assets/claim.html', {'item': item})
-
-    location_claim = request.POST.get('Location').lower()
-    item_info = ItemInfo.objects.get(pk=request.POST.get('ItemID'))
-    location_actual = item_info.Location.lower()
-    claim_success = location_actual in location_claim or location_claim in location_actual
-
-    if claim_success:
-        ClaimInfo.objects.create(
-            UserID=request.user,
-            Location=location_claim,
-            ItemID=item_info,
-        )
-
-    return render(request, 'assets/claim.html',
-                  {'item': item, 'status': claim_success, 'post': True})
-
 
 """This code is a view function called "home" that handles an HTTP request. When the view is called, 
 it retrieves all objects in the "ItemInfo" model and stores them in the variable "data". The function then returns a 
 rendered template called "assets/home_page.html", along with the data from "ItemInfo" passed as context to the template. """
 
 
+
 def home(request):
-    items = ItemInfo.objects.all()
+    item = ItemInfo.objects.all()
     context = {
-        "items": items
+        "item": item
     }
     return render(request, 'assets/home_page.html', context)
-
 
 """
 def item_list(request):
@@ -84,23 +42,16 @@ def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         print('Hello')
-
         if form.is_valid():
             objuser = form.save()
-
             print(objuser.id)
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-
             print(request.user.id)
-
             objt = UserProfile(user=objuser, studentID=request.POST.get('studentID'), branch=request.POST.get('branch'),
                                year=request.POST.get('year'), phone_no=request.POST.get('phone_no'))
-
             print(objt)
-
             objt.save()
-
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('profile_page')
@@ -171,12 +122,55 @@ submits a POST request to the endpoint. When the function is triggered, it creat
 database with the studentID, Description, and Location information provided in the POST request. Finally, 
 the function returns a rendering of the assets/request_item.html template. """
 
-
+"""
 def request_item(request):
     if request.method == 'POST':
         obj = RequestInfo.objects.create(
             id=request.POST.get('id'),
+            Item_info=request.POST.get('Item info'),
             Description=request.POST.get('Description'),
             Location=request.POST.get('Location')
         )
     return render(request, 'assets/request_item.html')
+
+
+"""
+
+
+def request_item(request):
+    if request.method == 'POST':
+        item_info = request.POST.get('Item info')
+        description = request.POST.get('Description')
+        location = request.POST.get('Location')
+
+        item = RequestInfo(Item_info=item_info, Description=description, Location=location)
+        item.save()
+
+        # Redirect to the home page after saving the item
+        return redirect('edit_profile')
+
+    return render(request, 'assets/request_item.html')
+
+
+from django.shortcuts import redirect
+from .models import RequestInfo
+
+def delete_info(request):
+    RequestInfo.objects.all().delete()
+    return redirect('home_page')
+
+
+def item_list(request):
+    items = ItemInfo.objects.all()
+    context = {
+        "items": items
+    }
+    return render(request, "assets/items.html", context)
+
+
+
+
+
+
+
+

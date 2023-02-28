@@ -4,6 +4,7 @@ from django.db import models
 
 # Create your models here.
 
+# user profile models
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     studentID = models.IntegerField(default=0)
@@ -15,22 +16,21 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+# models for items
 class ItemInfo(models.Model):
-    ItemID = models.AutoField(primary_key=True)
+    itemID = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    the_date = models.DateTimeField(auto_now=True)
+    Item_info = models.CharField(default="", max_length=150)
     Description = models.CharField(default="", max_length=150)
     Location = models.CharField(default="", max_length=100)
-    Image = models.ImageField(upload_to='images', blank=True)
-    Find_Date = models.DateTimeField(auto_now=True)
 
 
-class ClaimInfo(models.Model):
-    ClaimID = models.AutoField(primary_key=True)
-    UserID = models.ForeignKey(User, on_delete=models.CASCADE)
-    ItemID = models.ForeignKey(ItemInfo, on_delete=models.CASCADE)
-    Location = models.CharField(default="", max_length=100)
+def __str__(self):
+    return self.title
 
 
 class RequestInfo(models.Model):
-    StudentID = models.IntegerField(default=0)
-    Description = models.CharField(default="", max_length=150)
-    Location = models.CharField(default="", max_length=100)
+    Item_info = models.CharField(max_length=150)
+    Description = models.CharField(max_length=150)
+    Location = models.CharField(max_length=100)

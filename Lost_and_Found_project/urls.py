@@ -3,6 +3,8 @@ from assets import views
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 
+
+
 app_name = 'assets'
 
 urlpatterns = [
@@ -12,8 +14,10 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='assets/logout.html'), name='logout'),
     path('register/', views.register, name='register'),
     path('profile_page/', views.profile_page, name='profile_page'),
-    path('request/', views.request_item, name='request_item'),
+    path('request_item/', views.request_item, name='request_item'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('password/', views.change_password, name='change_password'),
-    path('claim/<int:id>/', views.claim, name='claim'),
+    path('delete_info/', views.delete_info, name='delete_info'),
+
+
 ]

@@ -1,20 +1,21 @@
+<!-- request_item.html -->
 {%extends 'base.html'%}
 {%block head%}
-<title>REQUEST ITEM FORM</title>
+<title>REPORT ITEM</title>
 {%endblock%}
 {%block body%}
 <div id="main">
   <div class="container">
     <div class="container" align="center"> <b>
-        <p style="font-size: 35px">REPORT ITEM FORM</p>
+        <p style="font-size: 35px">REPORT ITEM</p>
       </b></div>
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post"action="{% url 'request_item' %}">
       {% csrf_token %}
       <div class="form-group">
         <br><br><br><br>
-        <label class="control-label col-sm-2" for="StudentID" style="font-size:20px">ITEM TITLE:</label>
+        <label class="control-label col-sm-2" for="Item info" style="font-size:20px">ITEM TITLE:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="StudentID" placeholder="ITEM TITLE" name="SID" style="font-size: 18px" />
+          <input type="text" class="form-control" id="Item info" placeholder="ITEM TITLE" name="Item info" style="font-size: 18px" />
           <br><br>
         </div>
         <label class="control-label col-sm-2" for="Description" style="font-size:20px">DESCRIPTION:</label>
@@ -25,8 +26,17 @@
         </div>
         <label class="control-label col-sm-2" for="Location" style="font-size:20px">LOCATION:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="Location" placeholder="ENTER THE LOCATION WHERE ITEM WAS FOUNDED" name="Location"
-            style="font-size: 18px" />
+         <div class="col-sm-10">
+  <select class="form-control" id="Location" name="Location" style="font-size: 18px">
+
+    <option value="">Select a location</option>
+    <option value="Library">Library</option>
+    <option value="Canteen">Canteen</option>
+    <option value="Reception">Reception</option>
+    <option value="Room 821">Room 821</option>
+    <option value="Room 811">Room 811</option>
+  </select>
+</div>
           <br><br>
         </div>
         <div class="container" align="center">
