@@ -1,0 +1,28 @@
+{% extends "assets/../base.html" %}
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mt-2 px-3 py-2 bg-white rounded-sm shadow-md">
+        <h3 class="text-3xl text-gray-89">{{ item.Item_info }}</h3>
+        <p class="text-gray-500">{{ item.Description }}</p>
+        <p class="text-gray-500">{{ item.Location }}</p>
+          <a href="{% url 'item_details' item.id %}" class="text-blue-500">
+          View details
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bg-white {
+    background-color: white;
+  }
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+{% endblock %}
