@@ -1,33 +1,32 @@
 {% extends 'base.html' %}
 {% block head %}
-<title>Register</title>
+  <title>Campus Finder | Register</title>
 {% endblock %}
 {% block body %}
 <div class="container">
-  <div class="container" align="center" style="font-size: 30px">
-    <h1>SIGN UP</h1>
+  <div class="container" style="text-align: center; font-size: 30px">
+    <h3>REGISTER NEW PROFILE</h3>
   </div>
-  <form class="form-horizontal" method="post">
+  <form class="form-horizontal" method="post" onsubmit="showConfirmation()">
     {% csrf_token %}
     {% for field in form %}
-    <p style="font-size: 18px">
-
-
-      {{ field.label_tag }}<br>
+    <div style="margin: 10px 0">
+      {{ field.label_tag }}
       {{ field }}
       {% if field.help_text %}
-      <small style="color: black">{{ field.help_text }}</small>
+        <small style="color: black">{{ field.help_text }}</small>
       {% endif %}
       {% for error in field.errors %}
-      <p style="color: red">{{ error }}</p>
+        <p style="color: red">{{ error }}</p>
       {% endfor %}
-    </p>
+    </div>
     {% endfor %}
-    <br><br>
-    <button class="button" type="submit">Sign up</button>
-    <br><br>
+    <button class="button" type="submit">Create Account</button>
   </form>
-
 </div>
-
+<script>
+function showConfirmation() {
+  alert("Account profile successfully created!");
+}
+</script>
 {% endblock %}

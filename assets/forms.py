@@ -2,16 +2,17 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
-from assets.models import ItemInfo
+from assets.models import ItemData
+
 
 # SIGN UP FORM
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
     last_name = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
     email = forms.EmailField(max_length=254, help_text='Required.Enter a valid email address.')
-    studentID = forms.IntegerField(required=True, help_text='Compulsory Field')
+ #   studentID = forms.IntegerField(required=True, help_text='Compulsory Field')
     branch = forms.CharField(max_length=10, required=True, help_text='Compulsory Field')
-    year = forms.CharField(max_length=10, required=True, help_text='Compulsory Field')
+  #  year = forms.CharField(max_length=10, required=True, help_text='Compulsory Field')
     phone_no = forms.IntegerField(required=True, help_text='Compulsory Field')
 
     class Meta:
@@ -33,9 +34,10 @@ class ItemInfoForm(ModelForm):
     description = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
     location = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
     image = forms.ImageField()
+
     # date
-    #image
+    # image
 
     class Meta:
-        model = ItemInfo
+        model = ItemData
         fields = ('Item_info', 'description', 'location', 'image')

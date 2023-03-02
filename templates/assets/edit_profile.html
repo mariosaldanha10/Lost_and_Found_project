@@ -10,7 +10,6 @@
     <tr>
         {% if field.name != 'password'%}
         <td>{{ field.label_tag }}</td><td>{{ field }}</td>
-        
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}

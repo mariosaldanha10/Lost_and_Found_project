@@ -2,9 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-# Create your models here.
-
-# user profile models
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     studentID = models.IntegerField(default=0)
@@ -16,18 +13,15 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-# models for items
-class ItemInfo(models.Model):
+class ItemData(models.Model):
     itemID = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    the_date = models.DateTimeField(auto_now=True)
     Item_info = models.CharField(default="", max_length=150)
     Description = models.CharField(default="", max_length=150)
     Location = models.CharField(default="", max_length=100)
 
-
-def __str__(self):
-    return self.title
+    def __str__(self):
+        return self.title
 
 
 class RequestInfo(models.Model):

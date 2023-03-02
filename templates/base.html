@@ -7,42 +7,64 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   {% block head %}
-  <title>Lost and Found</title>
-{% endblock %}
+  <title>Campus Finder</title>
+  {% endblock %}
 </head>
-<body class="container">
+<body>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="{% url 'home_page' %}">
-            <p style="color: #f1f1f1">LOST AND FOUND |  lost and found automation services website for educational institute</p>
+          <div class="logo-container">
+            <img src="{% get_media_prefix %}logo.png" alt="My Image" class="logo">
+            <p class="logo-text">Campus Finder | Find your lost items, fast and easy with us! </p>
+          </div>
         </a>
       </div>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="{% url 'home_page' %}"><b>Home</b></a></li>
-      {%if user.is_authenticated %}
+    <li><a href="{% url 'home_page' %}"><b>Home</b></a></li>
+    {%if user.is_authenticated %}
       <li><a href="{% url 'profile_page' %}"><b>Profile</b></a></li>
       <li><a href="{% url 'edit_profile' %}"><b>Edit Profile</b></a></li>
       <li><a href="{% url 'request_item' %}"><b>Report Item</b></a></li>
-      {%else%}
+        <li><a href="{% url 'register' %}"><b>Register New Profile</b></a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>Dashboard</b> <span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-custom">
+          <li><a href="#">Submenu Item 1</a></li>
+          <li><a href="#">Submenu Item 2</a></li>
+          <li><a href="#">Submenu Item 3</a></li>
+        </ul>
+      </li>
+    {%else%}
       <li><a href="{% url 'login' %}"><b>Login</b></a></li>
-      {%endif%}
+    {%endif%}
     </ul>
     <ul class="nav navbar-nav navbar-right">
       {% if user.is_authenticated %}
       <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span><b>Logout</b></a></li>
       {%else%}
-      <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span><b>Sign Up</b></a></li>
+
       {% endif %}
     </ul>
   </div>
 </nav>
+<!--
+<li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span><b>Sign Up</b></a></li>
+-->
+<div class="container">
   {% block body %}
   <h1>Base</h1>
   {% endblock %}
+</div>
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2023 <b>Campus Finder</b> | All rights reserved.</p>
+  </div>
+</footer>
 </body>
 </html>
 

@@ -1,23 +1,15 @@
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from assets.forms import EditProfileForm
-from assets.models import UserProfile, ItemInfo, RequestInfo
+from assets.models import UserProfile, RequestInfo, ItemData
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
+from django.shortcuts import render, get_object_or_404
 
 """This code is a view function called "home" that handles an HTTP request. When the view is called, 
 it retrieves all objects in the "ItemInfo" model and stores them in the variable "data". The function then returns a 
 rendered template called "assets/home_page.html", along with the data from "ItemInfo" passed as context to the template. """
-
-
-
-def home(request):
-    item = ItemInfo.objects.all()
-    context = {
-        "item": item
-    }
-    return render(request, 'assets/home_page.html', context)
 
 """
 def item_list(request):
@@ -26,6 +18,13 @@ def item_list(request):
         "items": items
     }
     return render(request, "items.html", context)
+    
+    def home(request):
+    item = ItemData.objects.all()
+    context = {
+        "item": item
+    }
+    return render(request, 'assets/home_page.html', context)
 
 """
 
@@ -146,14 +145,20 @@ def request_item(request):
         item = RequestInfo(Item_info=item_info, Description=description, Location=location)
         item.save()
 
-        # Redirect to the home page after saving the item
-        return redirect('edit_profile')
+        return redirect('home_page')
 
     return render(request, 'assets/request_item.html')
 
 
+def home(request):
+    request_info_objects = RequestInfo.objects.all()
+    context = {'request_info_objects': request_info_objects}
+    return render(request, 'assets/home_page.html', context)
+
+
 from django.shortcuts import redirect
 from .models import RequestInfo
+
 
 def delete_info(request):
     RequestInfo.objects.all().delete()
@@ -161,16 +166,20 @@ def delete_info(request):
 
 
 def item_list(request):
-    items = ItemInfo.objects.all()
+    items = ItemData.objects.all()
     context = {
         "items": items
     }
     return render(request, "assets/items.html", context)
 
 
+def item_details(request, item_id):
+    item = get_object_or_404(RequestInfo, id=item_id)
+    context = {'item': item}
+    return render(request, 'assets/item_details.html', context)
 
 
-
-
-
-
+def delete_item(request, item_id):
+    item = get_object_or_404(RequestInfo, id=item_id)
+    item.delete()
+    return redirect('home_page')

@@ -1,15 +1,18 @@
 <!-- request_item.html -->
-{%extends 'base.html'%}
-{%block head%}
+{% extends 'base.html'%}
+{% block head %}
+
 <title>REPORT ITEM</title>
-{%endblock%}
-{%block body%}
+{% endblock %}
+{% block body %}
 <div id="main">
   <div class="container">
-    <div class="container" align="center"> <b>
-        <p style="font-size: 35px">REPORT ITEM</p>
-      </b></div>
-    <form class="form-horizontal" method="post"action="{% url 'request_item' %}">
+    <div class="container" align="center">
+      <b>
+        <p style="font-size: 35px">REPORT LOST ITEM</p>
+      </b>
+    </div>
+    <form class="form-horizontal" method="post" action="{% url 'request_item' %}">
       {% csrf_token %}
       <div class="form-group">
         <br><br><br><br>
@@ -26,24 +29,34 @@
         </div>
         <label class="control-label col-sm-2" for="Location" style="font-size:20px">LOCATION:</label>
         <div class="col-sm-10">
-         <div class="col-sm-10">
-  <select class="form-control" id="Location" name="Location" style="font-size: 18px">
-
-    <option value="">Select a location</option>
-    <option value="Library">Library</option>
-    <option value="Canteen">Canteen</option>
-    <option value="Reception">Reception</option>
-    <option value="Room 821">Room 821</option>
-    <option value="Room 811">Room 811</option>
-  </select>
-</div>
+          <div class="col-sm-10">
+            <select class="form-control" id="Location" name="Location" style="font-size: 18px">
+              <option value="">Select a location</option>
+              <option value="Library">Library - Dorset Belvedere Place</option>
+              <option value="Canteen">Canteen - Dorset Belvedere Place</option>
+              <option value="Reception - Dorset Belvedere Place">Reception - Dorset Belvedere Place</option>
+              <option value="Room 811 - Dorset Belvedere Place">Room 811 - Dorset Belvedere Place</option>
+              <option value="Room 821 - Dorset Belvedere Place">Room 821 - Dorset Belvedere Place</option>
+              <option value="Room 831 - Dorset Belvedere Place">Room 831 - Dorset Belvedere Place</option>
+              <option value="Room 832 - Dorset Belvedere Place">Room 832 - Dorset Belvedere Place</option>
+            </select>
+          </div>
           <br><br>
         </div>
         <div class="container" align="center">
-          <input type="Submit" id="Submit" name="Submit" value="SUBMIT" class="button" /><br><br>
+            <button type="button" id="Cancel" class="button cancel-button" onclick="goBack()">CANCEL</button>
+          <button type="submit" id="Save" name="Save" class="button" onclick="showMessage()">SAVE</button>
         </div>
       </div>
     </form>
   </div>
 </div>
-{%endblock%}
+<script>
+function showMessage() {
+  alert("Information saved successfully");
+}
+function goBack() {
+window.history.back();
+}
+</script>
+{% endblock %}

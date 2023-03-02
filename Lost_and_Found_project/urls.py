@@ -18,6 +18,15 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('password/', views.change_password, name='change_password'),
     path('delete_info/', views.delete_info, name='delete_info'),
-
-
+    path('item/<int:item_id>/', views.item_details, name='item_details'),
+    path('delete_item/<int:item_id>/', views.delete_item, name='delete_item')
 ]
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+# ... other URL patterns ...
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
