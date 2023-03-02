@@ -18,19 +18,18 @@
         <br><br><br><br>
         <label class="control-label col-sm-2" for="Item info" style="font-size:20px">ITEM TITLE:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="Item info" placeholder="ITEM TITLE" name="Item info" style="font-size: 18px" />
+          <input type="text" class="form-control" id="Item info" placeholder="ITEM TITLE" name="Item info" style="font-size: 18px" required />
           <br><br>
         </div>
         <label class="control-label col-sm-2" for="Description" style="font-size:20px">DESCRIPTION:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="Description" placeholder="ENTER ITEM DESCRIPTION" name="Description"
-            style="font-size: 18px" />
+          <textarea rows="3" class="form-control" name="Description" id="Description" data-gramm="false" wt-ignore-input="true"></textarea>
           <br><br>
         </div>
         <label class="control-label col-sm-2" for="Location" style="font-size:20px">LOCATION:</label>
         <div class="col-sm-10">
           <div class="col-sm-10">
-            <select class="form-control" id="Location" name="Location" style="font-size: 18px">
+            <select class="form-control" id="Location" name="Location" style="font-size: 18px" required>
               <option value="">Select a location</option>
               <option value="Library">Library - Dorset Belvedere Place</option>
               <option value="Canteen">Canteen - Dorset Belvedere Place</option>

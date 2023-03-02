@@ -1,11 +1,16 @@
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from assets.forms import EditProfileForm
-from assets.models import UserProfile, RequestInfo, ItemData
+from assets.forms import EditProfileForm, ItemInfoForm
+from assets.models import UserProfile, ItemData
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from .forms import SignUpForm
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
+from .models import RequestInfo
+from django.urls import reverse
+
+
 
 """This code is a view function called "home" that handles an HTTP request. When the view is called, 
 it retrieves all objects in the "ItemInfo" model and stores them in the variable "data". The function then returns a 
@@ -156,21 +161,9 @@ def home(request):
     return render(request, 'assets/home_page.html', context)
 
 
-from django.shortcuts import redirect
-from .models import RequestInfo
-
-
 def delete_info(request):
     RequestInfo.objects.all().delete()
     return redirect('home_page')
-
-
-def item_list(request):
-    items = ItemData.objects.all()
-    context = {
-        "items": items
-    }
-    return render(request, "assets/items.html", context)
 
 
 def item_details(request, item_id):
@@ -183,3 +176,11 @@ def delete_item(request, item_id):
     item = get_object_or_404(RequestInfo, id=item_id)
     item.delete()
     return redirect('home_page')
+
+
+
+
+
+
+
+

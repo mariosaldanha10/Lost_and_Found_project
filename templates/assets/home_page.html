@@ -1,32 +1,30 @@
 {% extends "assets/../base.html" %}
 
+{% load static %}
+
 {% block body %}
-
-<p>"The ultimate lost and found software for schools, colleges, and universities."</p>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      {% for item in request_info_objects %}
-      <div class="mt-2 px-3 py-2 bg-white rounded-sm shadow-md">
-        <h3 class="text-3xl text-gray-89">{{ item.Item_info }}</h3>
-        <p>Description: {{ item.Description }}</p>
-        <p>Location: {{ item.Location }}</p>
-        <a href="{% url 'item_details' item.id %}" class="text-blue-500">
-          View details
-        </a>
-      {% if user.is_authenticated %}
-        <form action="{% url 'delete_item' item.id %}" method="POST">
-          {% csrf_token %}
-          <input type="hidden" name="item_id" value="{{ item.id }}">
-          <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            Delete
-          </button>
-        </form>
-           {% endif %}
+    <p><b>"The ultimate lost and found software for schools, colleges, and universities."</b></p>
+<p>CREATE EDIT BUTTON AT ITEM_DETAILS PAGE TO UPDATE THE ITEM</p>
+    <p>CREATE CONTACT FORM PAGE TO GET IN TOUCH</p>
+    <p>INCLUDE NEW FIELDS SUCH AS CATEGORY AND PHOTOS</p>
+    <p>AFTER INCLUDING MORE FIELDS MAKE SURE TO STYLE THE PAGE</p>
+  <div class="container">
+        <div class="centered-box">
+  <p>FOUND ITEMS</p>
+</div>
+    <div class="row">
+      <div class="col-md-12">
+        {% for item in request_info_objects %}
+        <div class="mt-2 px-3 py-2 bg-white rounded-sm shadow-md">
+          <h3 class="text-3xl text-gray-89">{{ item.Item_info }}</h3>
+          <p>Description: {{ item.Description }}</p>
+          <p>Location: {{ item.Location }}</p>
+          <a href="{% url 'item_details' item.id %}" class="text-blue-500">
+            View details
+          </a>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </div>
-</div>
 {% endblock %}
