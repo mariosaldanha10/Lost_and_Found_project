@@ -13,18 +13,10 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-class ItemData(models.Model):
-    itemID = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=100)
-    Item_info = models.CharField(default="", max_length=150)
-    Description = models.CharField(default="", max_length=150)
-    Location = models.CharField(default="", max_length=100)
-
-    def __str__(self):
-        return self.title
-
-
 class RequestInfo(models.Model):
     Item_info = models.CharField(max_length=150)
     Description = models.CharField(max_length=150)
     Location = models.CharField(max_length=100)
+    the_date = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='media/', blank=True)
+

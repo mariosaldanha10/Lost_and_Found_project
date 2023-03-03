@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
-from assets.models import ItemData
+from assets.models import RequestInfo
 
 
 # SIGN UP FORM
@@ -34,10 +34,9 @@ class ItemInfoForm(ModelForm):
     description = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
     location = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
 
-    # IMAGE
-    # CATEGORY
-    # DATE
-
     class Meta:
-        model = ItemData
-        fields = ('Item_info', 'description', 'location')
+        model = RequestInfo
+        fields = ('Item_info',
+                  'description',
+                  'location',
+                  'image')

@@ -1,15 +1,12 @@
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from assets.forms import EditProfileForm, ItemInfoForm
-from assets.models import UserProfile, ItemData
+from assets.forms import EditProfileForm
+from assets.models import UserProfile
 from django.contrib.auth import authenticate, login
 from .forms import SignUpForm
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from .models import RequestInfo
-from django.urls import reverse
-
 
 
 """This code is a view function called "home" that handles an HTTP request. When the view is called, 
@@ -140,7 +137,7 @@ def request_item(request):
 
 """
 
-
+"""
 def request_item(request):
     if request.method == 'POST':
         item_info = request.POST.get('Item info')
@@ -148,6 +145,31 @@ def request_item(request):
         location = request.POST.get('Location')
 
         item = RequestInfo(Item_info=item_info, Description=description, Location=location)
+        item.save()
+
+        return redirect('home_page')
+
+    return render(request, 'assets/request_item.html')
+"""
+
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
+def request_item(request):
+    if request.method == 'POST':
+        item_info = request.POST.get('Item info')
+        description = request.POST.get('Description')
+        location = request.POST.get('Location')
+        image = request.FILES.get('image')
+
+        if image:
+            # save the file to the default storage location
+            file_name = default_storage.save(image.name, ContentFile(image.read()))
+            file_url = default_storage.url(file_name)
+        else:
+            file_url = ''
+
+        item = RequestInfo(Item_info=item_info, Description=description, Location=location, image=file_url)
         item.save()
 
         return redirect('home_page')
@@ -161,11 +183,6 @@ def home(request):
     return render(request, 'assets/home_page.html', context)
 
 
-def delete_info(request):
-    RequestInfo.objects.all().delete()
-    return redirect('home_page')
-
-
 def item_details(request, item_id):
     item = get_object_or_404(RequestInfo, id=item_id)
     context = {'item': item}
@@ -176,6 +193,8 @@ def delete_item(request, item_id):
     item = get_object_or_404(RequestInfo, id=item_id)
     item.delete()
     return redirect('home_page')
+
+
 
 
 

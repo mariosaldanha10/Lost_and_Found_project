@@ -145,10 +145,12 @@
 
 
 .logo {
-  width: 64px;
-    float: left;
-    margin-right: 10px
+  width: 49px;
+  height: 49px;
+  float: left;
+  margin-right: 10px;
 }
+
 
 .logo-container {
   display: flex;
@@ -187,10 +189,12 @@ body {
   align-items: center;
   height: 60px;
   background-color: #070707;
+
 }
 .centered-box p {
   color: #ffffff;
   font-size: 30px;
+
 }
 
 
