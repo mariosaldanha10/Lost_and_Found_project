@@ -1,5 +1,26 @@
 # Lost_and_Found_project
 
+This is a web application designed to help people report lost and found items in a college or hotel setting. The system includes user authentication, reporting of found items, and the ability to update a user's profile.
+
+Features
+User Authentication
+Staff members can log into the system to report found items that were discovered within the college or hotel. This provides a level of security and ensures that only authorized users can report found items. Users who report lost items can track the status of their lost items to see if they were found.
+
+Reporting Found Items
+Users can report found items by providing details such as the item title, description, location, and date and time. This information is displayed to other users who may have lost similar items, which can help facilitate the return of lost items to their rightful owners. Users can also update the item information if additional details become available.
+
+User Profile Editing
+Users can edit their profiles to include personal information such as name, email address, and phone number. This information can be used to contact the user if their lost item is found.
+
+To use the Lost and Found Website, follow these steps:
+
+Log into the system as a staff member.
+Report any found items by filling out the required fields.
+Users who have lost similar items can view the found item information and contact the staff member if the item is a match.
+Users who have lost items can track the status of their lost items to see if they were found.
+Users can edit their profile information to include personal contact information.
+
+
 References:
 Django CRUD (Create, Retrieve, Update, Delete) Function Based Views
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
