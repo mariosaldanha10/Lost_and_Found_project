@@ -31,6 +31,7 @@ Create a virtual environment: It is recommended to create a virtual environment 
 
 
 - python -m venv myenv
+
 This will create a new virtual environment named myenv.
 
 Activate the virtual environment: Once you have created the virtual environment, activate it by running the following command in your terminal:
