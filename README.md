@@ -45,14 +45,18 @@ If you are on Windows, use the following command instead:
 
 Configure the project settings: Depending on the project, you may need to configure the settings.py file with your local settings such as the database configuration, static files path, etc.
 
-Run migrations: If the project has a database, you need to run migrations to create the necessary tables. You can do this by running the following command in your terminal:
+Run migrations: If the project has a database, you need to run migrations to create the necessary tables. 
+
+You can do this by running the following command in your terminal:
 
 
 - python manage.py migrate
+
 Run the development server: Finally, you can run the development server by running the following command in your terminal:
 
 
 - python manage.py runserver
+
 This will start the development server at http://127.0.0.1:8000/. You can open this URL in your web browser to see the project.
 
 That's it! Now you can explore the Django project you have downloaded or forked from Github.
