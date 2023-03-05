@@ -20,6 +20,9 @@ class RequestInfo(models.Model):
     the_date = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='media/', blank=True)
 
+    def __str__(self):
+        return self.Item_info
+
 
 class Claim(models.Model):
     item = models.ForeignKey(RequestInfo, on_delete=models.CASCADE)
