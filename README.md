@@ -59,16 +59,21 @@ That's it! Now you can explore the Django project you have downloaded or forked 
 
 <h1><b>References</b></h1>
 Django CRUD (Create, Retrieve, Update, Delete) Function Based Views
+
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
 
 Django documentation
+
 https://docs.djangoproject.com/en/4.1/
 
 Working with forms in Django
+
 https://docs.djangoproject.com/en/4.1/topics/forms/
 
 Working with Database Models in Django
+
 https://docs.djangoproject.com/en/4.1/topics/db/models/
+
 
 Project developed in Django high-level python framework using HTML, CSS, JavaScript and MySQL.
 
