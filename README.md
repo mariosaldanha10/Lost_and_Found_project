@@ -79,4 +79,4 @@ This project may feature content that is copyright protected. Please, keep in mi
 
 Many Thanks!
 
-Mario Santos
+<b><h4>Mario Santos</b></h4>
