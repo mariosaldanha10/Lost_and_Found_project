@@ -1,6 +1,6 @@
 # Lost_and_Found_project
 
-<h1><b>Introduction</h1><b>
+<h1><b>Introduction</h1></b>
 This is a web application designed to help people report lost and found items in a college or hotel setting. The system includes user authentication, reporting of found items, and the ability to update a user's profile.
 
 <b>Features</b>
