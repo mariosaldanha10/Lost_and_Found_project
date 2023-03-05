@@ -1,5 +1,10 @@
 # Lost_and_Found_project
 
+<h1><b>Student Details</h1></b>
+
+- Student ID: 22453
+- Name: Mario Santos
+
 <h1><b>Introduction</h1></b>
 This is a web application designed to help people report lost and found items in a college or hotel setting. The system includes user authentication, reporting of found items, and the ability to update a user's profile.
 
@@ -78,6 +83,10 @@ https://docs.djangoproject.com/en/4.1/topics/forms/
 Working with Database Models in Django
 
 https://docs.djangoproject.com/en/4.1/topics/db/models/
+
+Django 4.0 Crash Course
+
+https://www.youtube.com/watch?v=Lx5-XtMGDsA
 
 
 Project developed in Django high-level python framework using HTML, CSS, JavaScript and MySQL.
