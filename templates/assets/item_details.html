@@ -1,6 +1,6 @@
 {% extends "assets/../base.html" %}
 {% block body %}
-    <----
+    <!----
 This is a template for displaying details of a single found item.
 Also, includes Item_info, Description, Location, the_date, and an image of the item.
     If the user is authenticated, the template displays two buttons for editing and deleting the item.
@@ -32,6 +32,8 @@ Also, includes Item_info, Description, Location, the_date, and an image of the i
         <p class="text-gray-700">When contacting us, please make sure to mention the title of the item and any other relevant details to confirm ownership.</p>
 
       <p/>Our staff will be happy to assist you in retrieving your lost item.</p>
+
+        <p/>You can also fill a form for our staff contact you clicking on the button below.</p>
 </div>
 
     </div>
@@ -50,11 +52,19 @@ Also, includes Item_info, Description, Location, the_date, and an image of the i
     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" >
       Edit
     </button>
+      {% else %}
+  </form>
+      <form action="{% url 'claim_item' item.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="item_id" value="{{ item.id }}">
+    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+      Claim this item
+    </button>
   </form>
   <br><br><br>
 </div>
 
-        {% endif %}
+{% endif %}
       </div>
     </div>
   </div>

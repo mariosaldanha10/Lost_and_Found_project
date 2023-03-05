@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
-from assets.models import RequestInfo
+from assets.models import RequestInfo, Claim
 
 
 # SIGN UP FORM
@@ -42,11 +42,19 @@ class RequestInfoForm(ModelForm):
                   'image')
 
 
+from django import forms
 
 
+class ClaimItemForm(forms.Form):
+    item_name = forms.CharField(label='Item Name', max_length=100)
+    claimant_name = forms.CharField(label='Claimant Name', max_length=100)
+    claimant_email = forms.EmailField(label='Claimant Email', max_length=100)
+    claimant_phone = forms.CharField(label='Claimant Phone', max_length=20)
+    additional_info = forms.CharField(label='Additional Information', max_length=500,
+                                      widget=forms.Textarea(attrs={'rows': 3}))
 
 
-class ClaimForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    message = forms.CharField(widget=forms.Textarea)
+class ClaimItemForm(forms.ModelForm):
+    class Meta:
+        model = Claim
+        fields = ['name', 'email', 'phone', 'message']

@@ -4,37 +4,17 @@ from assets.forms import EditProfileForm, RequestInfoForm
 from assets.models import UserProfile
 from django.contrib.auth import authenticate, login
 from .forms import SignUpForm
-from django.shortcuts import redirect
-
-"""This code is a view function called "home" that handles an HTTP request. When the view is called, 
-it retrieves all objects in the "ItemInfo" model and stores them in the variable "data". The function then returns a 
-rendered template called "assets/home_page.html", along with the data from "ItemInfo" passed as context to the template. """
-
-"""
-def item_list(request):
-    items = ItemInfo.objects.all()
-    context = {
-        "items": items
-    }
-    return render(request, "items.html", context)
-    
-    def home(request):
-    item = ItemData.objects.all()
-    context = {
-        "item": item
-    }
-    return render(request, 'assets/home_page.html', context)
-
-"""
-
-"""This code is a view function, named register. It handles user registration in the application. If the 
-request method is POST, it means that the form has been submitted, and it validates the data in the form by using the 
-SignUpForm. If the form is valid, it saves the user data into the database, authenticates the user, and logs them in. 
-If the form is not valid, the user is redirected to the signup page. If the request method is not POST, it means that 
-the form has not been submitted yet, and the code will simply render the signup form for the user. """
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.shortcuts import get_object_or_404
+from .forms import RequestInfo
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import ClaimItemForm
+from .models import Claim
 
 
-# sighup
+# allows a user to register for an account and create a profile associated with their account
 def register(request):
     print('Hello')
     if request.method == 'POST':
@@ -61,13 +41,7 @@ def register(request):
     return render(request, 'assets/signup.html', {'form': form})
 
 
-"""This code defines a view named "profile", which retrieves information about a user profile from the 
-database and displays it on a template. The user profile information is retrieved using the "UserProfile" model and 
-the "request.user.id" value, which represents the currently logged-in user. The retrieved information includes the 
-student ID, phone number, branch, and year. The information is passed as context to the template 
-"assets/profile_page.html" and is rendered in the HTML response that is returned to the user's browser. """
-
-
+# displays the user's profile information on a dedicated page
 def profile_page(request):
     obj = UserProfile.objects.get(user_id=request.user.id)
     args = {'studentID': obj.id,
@@ -77,13 +51,7 @@ def profile_page(request):
     return render(request, 'assets/profile_page.html', args)
 
 
-"""This code implements the functionality for editing a user's profile. The code starts by creating a form using the 
-EditProfileForm with either the POST data from the request or the instance of the current user. If the form is valid, 
-it saves the changes to the user profile and redirects the user to the profile page. If the form is not valid, 
-the code passes the form to the template for rendering in the context and returns a page that allows the user to edit 
-their profile information. """
-
-
+# allows the user to edit their profile information
 def edit_profile(request):
     form = EditProfileForm(request.POST or None, instance=request.user)
     if form.is_valid():
@@ -95,13 +63,7 @@ def edit_profile(request):
         return render(request, 'assets/edit_profile.html', context)
 
 
-
-"""This code is for changing the password of a user in Django. The PasswordChangeForm class is used to handle the 
-form for changing the password. The code checks if the request method is a 'POST' and if the form is valid. If both 
-conditions are met, the form data is saved, the user's session authentication hash is updated, and the user is 
-redirected to their profile page. The code then renders the change_password.html page, passing the form as context. """
-
-
+# allows the user to change their account password
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -116,45 +78,8 @@ def change_password(request):
     return render(request, 'assets/change_password.html', context)
 
 
-"""This code implements a view function for creating a request for a lost item. The function is triggered when a user 
-submits a POST request to the endpoint. When the function is triggered, it creates a new RequestInfo object in the 
-database with the studentID, Description, and Location information provided in the POST request. Finally, 
-the function returns a rendering of the assets/request_item.html template. """
-
-"""
-def request_item(request):
-    if request.method == 'POST':
-        obj = RequestInfo.objects.create(
-            id=request.POST.get('id'),
-            Item_info=request.POST.get('Item info'),
-            Description=request.POST.get('Description'),
-            Location=request.POST.get('Location')
-        )
-    return render(request, 'assets/request_item.html')
-
-
-"""
-
-"""
-def request_item(request):
-    if request.method == 'POST':
-        item_info = request.POST.get('Item info')
-        description = request.POST.get('Description')
-        location = request.POST.get('Location')
-
-        item = RequestInfo(Item_info=item_info, Description=description, Location=location)
-        item.save()
-
-        return redirect('home_page')
-
-    return render(request, 'assets/request_item.html')
-"""
-
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-
-
-def request_item(request):
+# allows the user to submit a report for a found item
+def report_item(request):
     if request.method == 'POST':
         item_info = request.POST.get('Item info')
         description = request.POST.get('Description')
@@ -173,32 +98,31 @@ def request_item(request):
 
         return redirect('home_page')
 
-    return render(request, 'assets/request_item.html')
+    return render(request, 'assets/report_item.html')
 
 
+# displays a list of all lost and found items on the home page
 def home(request):
     request_info_objects = RequestInfo.objects.all()
     context = {'request_info_objects': request_info_objects}
     return render(request, 'assets/home_page.html', context)
 
 
+# displays details about a specific lost or found item
 def item_details(request, item_id):
     item = get_object_or_404(RequestInfo, id=item_id)
     context = {'item': item}
     return render(request, 'assets/item_details.html', context)
 
 
+# allows the user to delete a found item
 def delete_item(request, item_id):
     item = get_object_or_404(RequestInfo, id=item_id)
     item.delete()
     return redirect('home_page')
 
 
-from django.shortcuts import render, get_object_or_404
-
-from .forms import RequestInfo
-
-
+# allows the user to update the details of a found item
 def update_item(request, item_id):
     item = RequestInfo.objects.get(id=item_id)
     if request.method == 'POST':
@@ -211,28 +135,24 @@ def update_item(request, item_id):
     return render(request, 'assets/item_update.html', {'form': form, 'item': item})
 
 
-
-from django.shortcuts import render, get_object_or_404
-from .models import RequestInfo
-from .forms import ClaimForm
-
-def claim_item(request):
-    item = get_object_or_404(RequestInfo)
-
+# allows the user to submit a claim for a specific found item
+def claim_item(request, item_id):
+    item = get_object_or_404(RequestInfo, pk=item_id)
     if request.method == 'POST':
-        form = ClaimForm(request.POST)
+        form = ClaimItemForm(request.POST)
         if form.is_valid():
-            claimant_name = form.cleaned_data['claimant_name']
-            claimant_email = form.cleaned_data['claimant_email']
-            claimant_phone = form.cleaned_data['claimant_phone']
-            # do something with the form data, like send an email to the owner of the lost item
-            return render(request, 'assets/claim_success.html')
-    else:
-        form = ClaimForm()
+            # create a new claim object
+            claim = Claim(item=item, name=form.cleaned_data['name'], email=form.cleaned_data['email'],
+                          phone=form.cleaned_data['phone'], message=form.cleaned_data['message'])
+            claim.save()  # save the claim to the database
 
+            return redirect('item_details', item_id=item_id)
+    else:
+        form = ClaimItemForm()
     return render(request, 'assets/claim_item.html', {'form': form, 'item': item})
 
 
-
-
-
+# displays a list of all claims that have been submitted for found items.
+def view_claims(request):
+    claims = Claim.objects.all()
+    return render(request, 'assets/claims.html', {'claims': claims})

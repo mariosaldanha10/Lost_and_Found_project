@@ -20,3 +20,11 @@ class RequestInfo(models.Model):
     the_date = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='media/', blank=True)
 
+
+class Claim(models.Model):
+    item = models.ForeignKey(RequestInfo, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

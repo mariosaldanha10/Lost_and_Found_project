@@ -29,8 +29,9 @@
     {%if user.is_authenticated %}
       <li><a href="{% url 'profile_page' %}"><b>Profile</b></a></li>
       <li><a href="{% url 'edit_profile' %}"><b>Edit Profile</b></a></li>
-      <li><a href="{% url 'request_item' %}"><b>Report Item</b></a></li>
+      <li><a href="{% url 'report_item' %}"><b>Report Item</b></a></li>
         <li><a href="{% url 'register' %}"><b>Register New Profile</b></a></li>
+        <li><a href="{% url 'view_claims' %}"><b>Claims</b></a></li>
     {%else%}
       <li><a href="{% url 'login' %}"><b>Login</b></a></li>
     {%endif%}
