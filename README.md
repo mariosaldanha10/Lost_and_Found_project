@@ -30,7 +30,7 @@ Install the required dependencies: Make sure you have Python and Django installe
 Create a virtual environment: It is recommended to create a virtual environment to isolate the dependencies of the project from your system's global Python environment. You can create a virtual environment by running the following command in your terminal:
 
 
--python -m venv myenv
+- python -m venv myenv
 This will create a new virtual environment named myenv.
 
 Activate the virtual environment: Once you have created the virtual environment, activate it by running the following command in your terminal:
