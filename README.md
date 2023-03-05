@@ -29,33 +29,34 @@ Install the required dependencies: Make sure you have Python and Django installe
 Create a virtual environment: It is recommended to create a virtual environment to isolate the dependencies of the project from your system's global Python environment. You can create a virtual environment by running the following command in your terminal:
 
 
-python -m venv myenv
+-python -m venv myenv
 This will create a new virtual environment named myenv.
 
 Activate the virtual environment: Once you have created the virtual environment, activate it by running the following command in your terminal:
 
-source myenv/bin/activate
+- source myenv/bin/activate
+
 If you are on Windows, use the following command instead:
 
 
-myenv\Scripts\activate
+- myenv\Scripts\activate
 
 Configure the project settings: Depending on the project, you may need to configure the settings.py file with your local settings such as the database configuration, static files path, etc.
 
 Run migrations: If the project has a database, you need to run migrations to create the necessary tables. You can do this by running the following command in your terminal:
 
 
-python manage.py migrate
+- python manage.py migrate
 Run the development server: Finally, you can run the development server by running the following command in your terminal:
 
 
-python manage.py runserver
+- python manage.py runserver
 This will start the development server at http://127.0.0.1:8000/. You can open this URL in your web browser to see the project.
 
 That's it! Now you can explore the Django project you have downloaded or forked from Github.
 
 
-<b>References</b>
+<h1><b>References</b></h1>
 Django CRUD (Create, Retrieve, Update, Delete) Function Based Views
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
 
