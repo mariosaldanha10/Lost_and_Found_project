@@ -34,7 +34,7 @@ https://docs.djangoproject.com/en/4.1/topics/forms/
 Working with Database Models in Django
 https://docs.djangoproject.com/en/4.1/topics/db/models/
 
-Project developed in Django using HTML, CSS, JavaScript and MySQL.
+Project developed in Django high-level python framework using HTML, CSS, JavaScript and MySQL.
 
 
 <b>COPYRIGHT DISCLAIMER</b>
