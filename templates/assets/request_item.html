@@ -7,6 +7,8 @@
     <title>REPORT ITEM</title>
   {% endblock %}
 </head>
+<--The body block contains a container with a form that
+allows the user to input information about the found item, including the title, description, image, and location.-->
 {% block body %}
 <div id="main">
   <div class="container">
@@ -51,6 +53,10 @@
           <br><br>
         </div>
         <div class="container" align="center">
+            <--The body block also contains two JavaScript functions.
+            The showMessage() function displays an alert message when the user clicks the "SAVE" button,
+            indicating that the information has been saved successfully.
+            The goBack() function allows the user to go back to the previous page when they click the "CANCEL" button.-->
             <button type="button" id="Cancel" class="button cancel-button" style="margin-right: 20px;" onclick="goBack()">CANCEL</button>
           <button type="submit" id="Save" name="Save" class="button" style="margin-left: 20px;" onclick="showMessage()">SAVE</button>
         </div>
