@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <div class="container">
+    <h2>Update Item</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    <h3>Current Item Information:</h3>
+    <p>{{ item.Item_info }}</p>
+    <p>{{ item.Description }}</p>
+    <p>{{ item.Location }}</p>
+    <p>{{ item.the_date }}</p>
+  </div>
+{% endblock %}
+
