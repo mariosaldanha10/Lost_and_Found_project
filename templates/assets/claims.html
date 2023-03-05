@@ -1,0 +1,33 @@
+{% extends 'assets/../base.html' %}
+
+{% block content %}
+  <h2>Submitted Claims</h2>
+  {% if claims %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Claimant Name</th>
+          <th>Claimant Email</th>
+          <th>Claimant Phone</th>
+          <th>Message</th>
+          <th>Date Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for claim in claims %}
+          <tr>
+            <td>{{ claim.item }}</td>
+            <td>{{ claim.name }}</td>
+            <td>{{ claim.email }}</td>
+            <td>{{ claim.phone }}</td>
+            <td>{{ claim.message }}</td>
+            <td>{{ claim.date_submitted }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No claims have been submitted yet.</p>
+  {% endif %}
+{% endblock %}
