@@ -84,6 +84,10 @@ Working with Database Models in Django
 
 https://docs.djangoproject.com/en/4.1/topics/db/models/
 
+Django 4.0 Crash Course
+
+https://www.youtube.com/watch?v=Lx5-XtMGDsA
+
 
 Project developed in Django high-level python framework using HTML, CSS, JavaScript and MySQL.
 
