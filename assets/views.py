@@ -1,13 +1,10 @@
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from assets.forms import EditProfileForm
+from assets.forms import EditProfileForm, RequestInfoForm
 from assets.models import UserProfile
 from django.contrib.auth import authenticate, login
 from .forms import SignUpForm
-from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
-from .models import RequestInfo
-
 
 """This code is a view function called "home" that handles an HTTP request. When the view is called, 
 it retrieves all objects in the "ItemInfo" model and stores them in the variable "data". The function then returns a 
@@ -98,6 +95,7 @@ def edit_profile(request):
         return render(request, 'assets/edit_profile.html', context)
 
 
+
 """This code is for changing the password of a user in Django. The PasswordChangeForm class is used to handle the 
 form for changing the password. The code checks if the request method is a 'POST' and if the form is valid. If both 
 conditions are met, the form data is saved, the user's session authentication hash is updated, and the user is 
@@ -155,6 +153,7 @@ def request_item(request):
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
+
 def request_item(request):
     if request.method == 'POST':
         item_info = request.POST.get('Item info')
@@ -195,9 +194,43 @@ def delete_item(request, item_id):
     return redirect('home_page')
 
 
+from django.shortcuts import render, get_object_or_404
+
+from .forms import RequestInfo
+
+
+def update_item(request, item_id):
+    item = RequestInfo.objects.get(id=item_id)
+    if request.method == 'POST':
+        form = RequestInfoForm(request.POST, request.FILES, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('/home_page')
+    else:
+        form = RequestInfoForm(instance=item)
+    return render(request, 'assets/item_update.html', {'form': form, 'item': item})
 
 
 
+from django.shortcuts import render, get_object_or_404
+from .models import RequestInfo
+from .forms import ClaimForm
+
+def claim_item(request):
+    item = get_object_or_404(RequestInfo)
+
+    if request.method == 'POST':
+        form = ClaimForm(request.POST)
+        if form.is_valid():
+            claimant_name = form.cleaned_data['claimant_name']
+            claimant_email = form.cleaned_data['claimant_email']
+            claimant_phone = form.cleaned_data['claimant_phone']
+            # do something with the form data, like send an email to the owner of the lost item
+            return render(request, 'assets/claim_success.html')
+    else:
+        form = ClaimForm()
+
+    return render(request, 'assets/claim_item.html', {'form': form, 'item': item})
 
 
 

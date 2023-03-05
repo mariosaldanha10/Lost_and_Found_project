@@ -29,7 +29,7 @@ class EditProfileForm(UserChangeForm):
 
 
 # REQUEST ITEM FORM
-class ItemInfoForm(ModelForm):
+class RequestInfoForm(ModelForm):
     Item_info = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
     description = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
     location = forms.CharField(max_length=30, required=True, help_text='Compulsory Field')
@@ -40,3 +40,13 @@ class ItemInfoForm(ModelForm):
                   'description',
                   'location',
                   'image')
+
+
+
+
+
+
+class ClaimForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)

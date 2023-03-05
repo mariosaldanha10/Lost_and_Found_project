@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+
 app_name = 'assets'
 
 urlpatterns = [
@@ -18,11 +19,9 @@ urlpatterns = [
     path('password/', views.change_password, name='change_password'),
     path('item/<int:item_id>/', views.item_details, name='item_details'),
     path('delete_item/<int:item_id>/', views.delete_item, name='delete_item'),
+    path('update_item/<int:item_id>/', views.update_item, name='update_item'),
+    path('claim-item/<int:item_id>/', views.claim_item, name='claim_item'),
 ]
 
-
-# ... other URL patterns ...
-
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
