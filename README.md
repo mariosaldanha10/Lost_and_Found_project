@@ -79,6 +79,9 @@ The final step is to enter your password. You will be asked to enter your passwo
 Password: **********
 
 Password (again): *********
+
+Then you should see the message as follows: 
+
 Superuser created successfully.
 
 Run the development server: Finally, you can run the development server by running the following command in your terminal:
