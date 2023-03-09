@@ -57,8 +57,30 @@ You can do this by running the following command in your terminal:
 
 - python manage.py migrate
 
-Run the development server: Finally, you can run the development server by running the following command in your terminal:
+Make sure to create first user using Django administration to log in (this was implemented as a security to avoid non staff to be using the management site) after first user is created it's possible to create multiple users when logging into site.
+Open a browser on the Django admin site http://127.0.0.1:8000/admin/
 
+To access the Django admin site you must create a admin user using terminal as follows:
+
+<h4>Creating an admin user</h4>
+
+First we’ll need to create a user who can login to the admin site. 
+Run the following command:
+
+$ python manage.py createsuperuser
+Enter your desired username and press enter.
+
+Username: admin
+You will then be prompted for your desired email address:
+
+Email address: admin@example.com
+The final step is to enter your password. You will be asked to enter your password twice, the second time as a confirmation of the first.
+
+Password: **********
+Password (again): *********
+Superuser created successfully.
+
+Run the development server: Finally, you can run the development server by running the following command in your terminal:
 
 - python manage.py runserver
 
