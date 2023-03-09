@@ -77,6 +77,7 @@ Email address: admin@example.com
 The final step is to enter your password. You will be asked to enter your password twice, the second time as a confirmation of the first.
 
 Password: **********
+
 Password (again): *********
 Superuser created successfully.
 
